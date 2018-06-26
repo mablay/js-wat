@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "web": "npx browserify index.js -o web.js"
+    "build": "npx browserify web/script.js -o web/bundle.js",
+    "serve": "npx live-server ."
   },
   "keywords": [],
   "author": "",

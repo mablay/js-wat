@@ -1,6 +1,6 @@
-const data = require('./src/main')
-const {row} = require('./src/log')
+const {evaluate} = require('./src/evaluate')
+const expressions = require('./src/expressions')
+const data = expressions.map(evaluate)
 
-// print table of js expressions and their evaluation
-row(['EXPRESSION', 'TYPE', 'VALUE', 'ERROR'])
-data.forEach(row)
+const columns = ['expression', 'type', 'value', 'error']
+console.table(data, columns)

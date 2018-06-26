@@ -1,4 +1,5 @@
-function row (args) {
+// log table
+function log (args) {
   const COL_SIZE = 24
   console.log(
     args.map(s => s
@@ -8,4 +9,4 @@ function row (args) {
   )
 }
 
-module.exports = {row}
+module.exports = {log}

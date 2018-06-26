@@ -1,5 +1,61 @@
 <html>
+<head>
+  <title>JS WAT</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
 <body>
-  <script src="./web.js"></script>
+  <div ng-app="jsWat" ng-controller="WatCtrl as vc">
+    <div>
+      <h3>JS WAT?!</h3>
+      <p>JavaScript is awesome! Sometimes it even "exceeds" your expectations...</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Expression</th>
+            <th scope="col">Type</th>
+            <th scope="col">Value</th>
+            <th scope="col">Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in vc.data">
+            <th scope="row" ng-bind="$index"></th>
+            <td ng-bind=record.expression></td>
+            <td ng-bind=record.type></td>
+            <td ng-bind=record.value></td>
+            <td ng-bind=record.error></td>
+          </tr>
+          <tr>
+            <th scope="row" ng-bind="vc.data.length"></th>
+            <td>
+              <div class="input-group mb-3">
+                <input  ng-model="expr"
+                        type="text"
+                        class="form-control"
+                        placeholder="new expression"
+                        ng-keyup="$event.keyCode == 13 ? vc.handleAddExpression(expr) : null">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary"
+                          type="button"
+                          ng-click=vc.handleAddExpression(expr)>+</button>
+                </div>
+              </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--
+      <h3>debug</h3>
+      <pre ng-bind="vc.data | json"></pre>
+      -->
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+  <script src="./web/bundle.js"></script>
 </body>
 </html>

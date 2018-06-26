@@ -809,36 +809,50 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":3,"_process":2,"inherits":1}],5:[function(require,module,exports){
 const {inspect} = require('util')
 
-// print table of js expressions and their evaluation
-row('EXPRESSION', 'TYPE', 'VALUE', 'ERROR')
-;[
-  'x',
-  '1',
-  '1 + 1',
-  '{} + []',
-  '[] + {}'
-].forEach(evaluate)
-
-// helper functions --->
+function evaluateEscaped (expr) {
+  const res = evaluate(expr)
+  res.value = inspect(res.value)
+  return res
+}
 
 function evaluate (expr) {
   let v
   try {
     v = eval(expr)
-    row(expr, typeof v, inspect(v), '')
+    return {expression: expr, type: typeof v, value: v}
   } catch (err) {
-    row(expr, '', '', err.name)
+    return {expression: expr, error: err.name}
   }
 }
 
-function row (...args) {
-  const COL_SIZE = 24
-  console.log(
-    args.map(s => s
-      .padStart(COL_SIZE)
-      .substring(0, COL_SIZE))
-      .join('')
-  )
-}
+module.exports = {evaluate, evaluateEscaped}
 
-},{"util":4}]},{},[5]);
+},{"util":4}],6:[function(require,module,exports){
+module.exports = [
+  'x',
+  '1',
+  '1 + 1',
+  '{} + []',
+  '[] + {}',
+  'typeof NaN',
+  'NaN'
+]
+
+},{}],7:[function(require,module,exports){
+const {evaluateEscaped} = require('../src/evaluate')
+
+const app = angular.module('jsWat', [])
+
+app.controller('WatCtrl', [function() {
+
+  this.data = require('../src/expressions.js').map(evaluateEscaped)
+
+  this.handleAddExpression = function handleAddExpression (expr) {
+    const record = evaluate(expr)
+    console.log('handleAddExpression ', record)
+    this.data.push(record)
+  }
+
+}])
+
+},{"../src/evaluate":5,"../src/expressions.js":6}]},{},[7]);

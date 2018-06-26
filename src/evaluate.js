@@ -1,13 +1,19 @@
 const {inspect} = require('util')
 
+function evaluateEscaped (expr) {
+  const res = evaluate(expr)
+  res.value = inspect(res.value)
+  return res
+}
+
 function evaluate (expr) {
   let v
   try {
     v = eval(expr)
-    return [expr, typeof v, inspect(v), '']
+    return {expression: expr, type: typeof v, value: v}
   } catch (err) {
-    return [expr, '', '', err.name]
+    return {expression: expr, error: err.name}
   }
 }
 
-module.exports = {evaluate}
+module.exports = {evaluate, evaluateEscaped}
