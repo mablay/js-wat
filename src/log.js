@@ -1,4 +1,4 @@
-function row (...args) {
+function row (args) {
   const COL_SIZE = 24
   console.log(
     args.map(s => s
