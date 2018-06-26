@@ -1,4 +1,5 @@
-const {inspect} = require('util')
+const {evaluate} = require('./src/evaluate')
+const {row} = require('./src/log')
 
 // print table of js expressions and their evaluation
 row('EXPRESSION', 'TYPE', 'VALUE', 'ERROR')
@@ -9,25 +10,3 @@ row('EXPRESSION', 'TYPE', 'VALUE', 'ERROR')
   '{} + []',
   '[] + {}'
 ].forEach(evaluate)
-
-// helper functions --->
-
-function evaluate (expr) {
-  let v
-  try {
-    v = eval(expr)
-    row(expr, typeof v, inspect(v), '')
-  } catch (err) {
-    row(expr, '', '', err.name)
-  }
-}
-
-function row (...args) {
-  const COL_SIZE = 24
-  console.log(
-    args.map(s => s
-      .padStart(COL_SIZE)
-      .substring(0, COL_SIZE))
-      .join('')
-  )
-}
