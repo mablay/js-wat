@@ -21,9 +21,9 @@
         <tbody>
           <tr ng-repeat="record in vc.data">
             <th scope="row" ng-bind="$index"></th>
-            <td ng-bind=record.expression></td>
+            <td><code ng-bind=record.expression></code></td>
             <td ng-bind=record.type></td>
-            <td ng-bind=record.value></td>
+            <td><samp ng-bind=record.value></samp></td>
             <td ng-bind=record.error></td>
           </tr>
           <tr>
@@ -31,6 +31,7 @@
             <td>
               <div class="input-group mb-3">
                 <input  ng-model="expr"
+                        ng-change="vc.handleModification(expr)"
                         type="text"
                         class="form-control"
                         placeholder="new expression"
@@ -42,17 +43,12 @@
                 </div>
               </div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td ng-bind=vc.live.type></td>
+            <td><samp ng-bind=vc.live.value></samp></td>
+            <td ng-bind=vc.live.error></td>
           </tr>
         </tbody>
       </table>
-
-      <!--
-      <h3>debug</h3>
-      <pre ng-bind="vc.data | json"></pre>
-      -->
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
