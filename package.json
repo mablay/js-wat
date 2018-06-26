@@ -2,6 +2,7 @@
   "name": "js-wat",
   "version": "1.0.0",
   "description": "",
+  "engines" : { "node" : ">=10.0.0" },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

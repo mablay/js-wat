@@ -1,6 +1,19 @@
 # JS-WAT
-Illustrates some edge cases where JavaScript behaves in a
-way that might not be expected.
+JavaScript - What!?
+
+js-wat evaluates and inspects expressions.
+Meant for educational / entertainment purpose.
+
+## Node
+Edit `/src/expressions.js` at your leisure.
+
+    npm start
+
+## Browser
+You can edit the expressions interactively.
+
+    npm run build
+    npm run web
 
 ## Credits
 
