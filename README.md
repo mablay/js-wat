@@ -13,7 +13,7 @@ Edit `/src/expressions.js` at your leisure.
 You can edit the expressions interactively.
 
     npm run build
-    npm run web
+    npm run serve
 
 ## Credits
 
